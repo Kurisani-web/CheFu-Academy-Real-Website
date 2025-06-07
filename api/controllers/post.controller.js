@@ -1,5 +1,6 @@
 import Post from '../models/post.model.js';
 import { errorHandler } from '../utils/error.js';
+import mongoose from 'mongoose';
 
 export const create = async (req, res, next) => {
   if (!req.user.isAdmin) {
@@ -31,26 +32,32 @@ export const getposts = async (req, res, next) => {
     const startIndex = parseInt(req.query.startIndex) || 0;
     const limit = parseInt(req.query.limit) || 9;
     const sortDirection = req.query.order === 'asc' ? 1 : -1;
-    const posts = await Post.find({
-      ...(req.query.userId && { userId: req.query.userId }),
-      ...(req.query.category && { category: req.query.category }),
-      ...(req.query.slug && { slug: req.query.slug }),
-      ...(req.query.postId && { _id: req.query.postId }),
-      ...(req.query.searchTerm && {
-        $or: [
-          { title: { $regex: req.query.searchTerm, $options: 'i' } },
-          { content: { $regex: req.query.searchTerm, $options: 'i' } },
-        ],
-      }),
-    })
+
+    // 🛡️ Build dynamic query safely
+    const queryObj = {};
+
+    if (req.query.userId) queryObj.userId = req.query.userId;
+    if (req.query.category) queryObj.category = req.query.category;
+    if (req.query.slug) queryObj.slug = req.query.slug;
+    if (req.query.searchTerm) {
+      queryObj.$or = [
+        { title: { $regex: req.query.searchTerm, $options: 'i' } },
+        { content: { $regex: req.query.searchTerm, $options: 'i' } },
+      ];
+    }
+
+    // ✅ Validate postId before using it
+    if (req.query.postId && mongoose.Types.ObjectId.isValid(req.query.postId)) {
+      queryObj._id = req.query.postId;
+    }
+
+    const posts = await Post.find(queryObj)
       .sort({ updatedAt: sortDirection })
       .skip(startIndex)
       .limit(limit);
 
     const totalPosts = await Post.countDocuments();
-
     const now = new Date();
-
     const oneMonthAgo = new Date(
       now.getFullYear(),
       now.getMonth() - 1,
