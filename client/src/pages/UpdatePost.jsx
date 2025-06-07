@@ -85,6 +85,13 @@ export default function UpdatePost() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!formData._id || !currentUser._id) {
+      setPublishError('Post ID or User ID is missing');
+      return;
+    }
+
+
     try {
       const res = await fetch(`/api/post/updatepost/${formData._id}/${currentUser._id}`, {
         method: 'PUT',
