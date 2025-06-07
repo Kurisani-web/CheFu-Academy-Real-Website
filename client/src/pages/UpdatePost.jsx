@@ -91,6 +91,9 @@ export default function UpdatePost() {
       return;
     }
 
+    console.log('Form Data ID:', formData._id);
+    console.log('Current User ID:', currentUser?._id);
+
 
     try {
       const res = await fetch(`/api/post/updatepost/${formData._id}/${currentUser._id}`, {
