@@ -54,8 +54,7 @@ export default function SignIn() {
             Academy
           </Link>
           <p className='text-sm mt-5'>
-            This is a demo project. You can sign in with your email and password
-            or with Google.
+            Welcome! You can sign in using your email and password or continue with your Google account.
           </p>
         </div>
         {/* right */}
