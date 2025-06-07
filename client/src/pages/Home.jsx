@@ -19,13 +19,25 @@ export default function Home() {
       <div className='flex flex-col gap-6 p-10  px-3 max-w-6xl mx-auto '>
         <h1 className='text-3xl font-bold lg:text-6xl pt-10'>Welcome to CheFu Academy</h1>
         <p className='text-gray-500 text-xs sm:text-sm'>
-          Welcome to my blog! Here you'll find a wide range of articles,
-          tutorials, and resources designed to help you grow as a developer.
-          Whether you're interested in web development, software engineering,
-          programming languages, or best practices in the tech industry, there's
-          something here for everyone. Dive in and explore the content to expand
-          your knowledge and skills.
-        </p>
+  At CheFu Academy, we’re committed to empowering developers, tech enthusiasts, and lifelong learners through high-quality content and practical knowledge. Whether you're just starting your journey or looking to sharpen your skills, you’ll find something valuable here.
+</p>
+
+<ul className='list-disc pl-4 text-gray-500 text-xs sm:text-sm space-y-1'>
+  <li>📚 In-depth tutorials on web and mobile development</li>
+  <li>💻 Hands-on guides for React, Next.js, Node.js, and Django</li>
+  <li>☁️ Cloud & DevOps: Firebase, AWS, CI/CD, Docker, GitHub Actions</li>
+  <li>🔐 Cybersecurity basics & best practices</li>
+  <li>🤖 AI & Machine Learning projects</li>
+  <li>📊 DSA & coding interview prep</li>
+  <li>🛠️ Productivity tooling (VS Code, Git, terminal)</li>
+  <li>🎯 Freelancing & career guidance</li>
+  <li>📱 React Native & Flutter app dev</li>
+  <li>🌐 Tech trends & industry news</li>
+</ul>
+
+<p className='text-gray-500 text-xs sm:text-sm'>
+  Whether you're building your first app, scaling a SaaS product, or just staying up to date — CheFuAcademy is here to guide you every step of the way.
+</p>
         <Link
           to='/search'
           className='text-xs sm:text-sm text-teal-500 font-bold hover:underline'
