@@ -19,7 +19,7 @@ export default function SignUp() {
     try {
       setLoading(true);
       setErrorMessage(null);
-      const res = await fetch('https://chefu-academy-real-website/api/auth/signup', {
+      const res = await fetch('https://chefu-academy-real-website.onrender.com/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

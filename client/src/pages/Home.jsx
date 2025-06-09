@@ -8,7 +8,7 @@ export default function Home() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await fetch('https://chefu-academy-real-website.onrender.com/api/post/getPosts', {
+      const res = await fetch('https://chefu-academy-real-website.onrender.com.onrender.com/api/post/getPosts', {
   credentials: 'include',
 });
       const data = await res.json();
